@@ -4,7 +4,7 @@
 
 import streamlit as st
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # LangChain imports
 from langchain_classic.chains import create_history_aware_retriever, create_retrieval_chain
@@ -21,8 +21,10 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 
 # Load environment variables
-load_dotenv()
-os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
+# load_dotenv()
+HF_TOKEN = st.secrets.get("HF_TOKEN")
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = HF_TOKEN
+# os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
 
 # Load embedding model
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
